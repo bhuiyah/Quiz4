@@ -22,8 +22,8 @@ public class PMap {
      * @return the number of key-value mappings in this map
      */
 
-    private ArrayList key;
-    private ArrayList value;
+    private ArrayList<Integer> key;
+    private ArrayList<Integer> value;
 
 
     public PMap(){
@@ -33,7 +33,7 @@ public class PMap {
 
     public Integer size() {
         // TODO
-        return 0;
+        return key.size();
     }
 
     /**
@@ -59,6 +59,11 @@ public class PMap {
      */
     public boolean containsKey(Integer key) {
         // TODO
+        for(int i = 0; i < this.key.size(); i++){
+            if(key.get(i) == key){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -91,6 +96,12 @@ public class PMap {
      */
     public Integer get(Integer key) {
         // TODO
+        if(!containsKey(key)) return null;
+        for(int i = 0; i < this.key.size(); i++){
+            if(key.get(i) == key){
+                return value.get(i);
+            }
+        }
         return 0;
     }
 
@@ -138,6 +149,16 @@ public class PMap {
      */
     public Integer remove(Integer key) {
         // TODO
+        if(!containsKey(key)) return null;
+        returnVal = 0;
+        for(int i = 0; i < this.key.size(); i++){
+            if(this.key.get(i) == key){
+                returnVal = this.value.get(i);
+                this.value.remove(i);
+                this.key.remove(i);
+                return returnVal;
+            }
+        }
         return 0;
     }
 
@@ -151,6 +172,11 @@ public class PMap {
      */
     public void putAll(Integer[] keys, Integer[] values) {
         // TODO
+        int len = key.size();
+        for(int i = 0; i < keys.length(); i++){
+            key.add(len + i, keys[i]);
+            value.add(len + i, values[i]);
+        }
     }
 
     /**
@@ -159,6 +185,9 @@ public class PMap {
      */
     public void clear() {
         // TODO
+        key.removeAll(key);
+        value.removeAll(value);
+
     }
 
     /**
@@ -168,7 +197,11 @@ public class PMap {
      */
     public Integer[] keySet() {
         // TODO
-        return null;
+        Integer[] list = new Integer[key.size()];
+        for(int i = 0; i < key.size(); i++) {
+            list[i] = key.get(i);
+        }
+        return list;
     }
 
     /**
@@ -192,6 +225,11 @@ public class PMap {
      */
     public PEntry[] entrySet() {
         // TODO
-        return null;
+        PEntry[] en = new PEntry[key.size()]
+        for(int i = 0; i < this.key.size(); i++){
+            en[i].key = this.key.get(i);
+            en[i].value = this.value.get(i);
+        }
+        return en;
     }
 }
