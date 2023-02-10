@@ -1,5 +1,5 @@
 /*
- * Phase A <studentA EID><studentB EID>
+ * Phase A <aj33777><mhb2275>
  * Phase B <studentB EID><studentA EID>
  */
 
@@ -45,6 +45,7 @@ public class PMap {
      */
     public boolean isEmpty() {
         // TODO
+        if (this.key.size() == 0) {return true};
         return false;
     }
 
@@ -71,6 +72,11 @@ public class PMap {
      */
     public boolean containsValue(Integer value) {
         // TODO
+        for (int i = 0; i < this.value.size(); i++){
+            if (value == this.value.get(i)){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -102,7 +108,17 @@ public class PMap {
      */
     public Integer put(Integer key, Integer value) {
         // TODO
-        return 0;
+        Integer val = null;
+        if (containsKey(key)){
+            val = get(key);
+            Integer idx = this.value.indexOf(val);
+            this.value.set(idx,value);
+        }
+        else {
+            this.key.add(key);
+            this.value.add(value);
+        }
+        return val;
     }
 
     /**
@@ -162,7 +178,11 @@ public class PMap {
      */
     public Integer[] values() {
         // TODO
-        return null;
+        Integer[] val = new Integer[this.values.size()];
+        for (int i = 0; i < this.values.size(); i++){
+            val[i] = this.values.get(i);
+        }
+        return val;
     }
 
     /**
